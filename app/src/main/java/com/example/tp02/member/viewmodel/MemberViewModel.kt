@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 
 //Service같은 놈
-class LoginViewModel(private val memberApiService: MemberApiService) {
+class MemberViewModel(private val memberApiService: MemberApiService) {
 
     private val _loginResult = MutableLiveData<Boolean>()
     val loginResult: LiveData<Boolean>get() = _loginResult

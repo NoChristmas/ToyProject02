@@ -4,8 +4,8 @@
     <data>
         <import type="android.view.View"/>
         <variable
-            name="loginViewModel"
-            type="com.example.tp02.member.viewmodel.LoginViewModel" />
+            name="memberViewModel"
+            type="com.example.tp02.member.viewmodel.MemberViewModel" />
     </data>
 
     <LinearLayout
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:onClick="@{() -> loginViewModel.clickLoginBtn(editUserId.getText().toString(), editPassword.getText().toString())}"
+            android:onClick="@{() -> memberViewModel.clickLoginBtn(editUserId.getText().toString(), editPassword.getText().toString())}"
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp" />

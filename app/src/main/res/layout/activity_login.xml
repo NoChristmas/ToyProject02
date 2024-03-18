@@ -4,7 +4,7 @@
     <data>
         <variable
             name="loginActivity"
-            type="com.example.tp02.LoginActivity" />
+            type="com.example.tp02.member.activity.LoginActivity" />
     </data>
 
     <LinearLayout
@@ -23,7 +23,7 @@
 
         <!-- 이메일 입력란 -->
         <EditText
-            android:id="@+id/edit_email"
+            android:id="@+id/edit_user_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="아이디를 입력하세요"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:hint="비밀번호를 입력하세요"
             android:inputType="textPassword"
-            android:layout_below="@id/edit_email"
+            android:layout_below="@id/edit_user_id"
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp" />

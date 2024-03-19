@@ -24,7 +24,10 @@
             </intent-filter>
         </activity>
         <!-- Register Activity -->
-        <activity android:name=".member.activity.RegisterActivity" />
+        <activity
+            android:name=".member.activity.RegisterActivity"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

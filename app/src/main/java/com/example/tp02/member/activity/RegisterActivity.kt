@@ -1,5 +1,6 @@
 package com.example.tp02.member.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,8 +35,12 @@ class RegisterActivity : AppCompatActivity() {
         memberViewModel.checkIdResult.observe(this, Observer {success ->
             if(success) {
                 showToast("사용가능한 아이디입니다")
+                binding.buttonSignup.isEnabled = true
+                binding.buttonIdCheck.isEnabled = false
             } else {
                 showToast("아이디 중복체크 실패")
+                binding.buttonSignup.isEnabled = false
+                binding.buttonIdCheck.isEnabled = true
             }
         })
 
@@ -43,6 +48,7 @@ class RegisterActivity : AppCompatActivity() {
         memberViewModel.registerResult.observe(this, Observer { success ->
             if(success) {
                 showToast("회원가입 성공")
+                goLoginActivity()
             } else {
                 showToast("회원가입 실패")
             }
@@ -51,5 +57,10 @@ class RegisterActivity : AppCompatActivity() {
     }
     private fun showToast(message: String) {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun goLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }

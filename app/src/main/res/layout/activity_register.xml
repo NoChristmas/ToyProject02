@@ -26,6 +26,7 @@
             android:id="@+id/edit_user_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="10"
             android:hint="아이디를 입력하세요"
             android:inputType="text"
             android:layout_marginTop="20dp"
@@ -40,12 +41,14 @@
             android:onClick="@{() -> memberViewModel.clickIdCheckBtn(editUserId.getText().toString())}"
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp" />
+            android:layout_marginEnd="30dp"
+            android:enabled="true"/>
         <!-- 비밀번호 입력란 -->
         <EditText
             android:id="@+id/edit_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="10"
             android:hint="비밀번호를 입력"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"
@@ -56,6 +59,7 @@
             android:id="@+id/edit_password_check"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="10"
             android:hint="비밀번호 확인 입력"
             android:inputType="textPassword"
             android:layout_marginTop="20dp"
@@ -66,6 +70,7 @@
             android:id="@+id/edit_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="10"
             android:hint="이름을 입력하세요"
             android:inputType="text"
             android:layout_marginTop="20dp"
@@ -76,6 +81,7 @@
             android:id="@+id/edit_user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="30"
             android:hint="이메일 입력"
             android:inputType="textEmailAddress"
             android:layout_marginTop="20dp"
@@ -90,6 +96,7 @@
             android:onClick="@{() -> memberViewModel.clickRegisterBtn(editUserId.getText().toString(),editPassword.getText().toString(),editUserName.getText().toString(),editUserEmail.getText().toString())}"
             android:layout_marginTop="20dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp" />
+            android:layout_marginEnd="30dp"
+            android:enabled="false" />
     </LinearLayout>
 </layout>

@@ -26,8 +26,16 @@
         <!-- Register Activity -->
         <activity
             android:name=".member.activity.RegisterActivity"
-            android:exported="true"
-            />
+            android:exported="true"/>
+        <activity
+            android:name=".board.activity.BoardMainActivity"
+            android:exported="true"/>
+        <activity android:name=".board.activity.BoardModifyActivity"
+            android:exported="true"/>
+        <activity android:name=".board.activity.BoardDetailActivity"
+            android:exported="true"/>
+        <activity android:name=".board.activity.BoardWriteActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>

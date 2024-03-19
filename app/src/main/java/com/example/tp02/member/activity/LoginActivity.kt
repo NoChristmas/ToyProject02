@@ -7,13 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.tp02.R
+import com.example.tp02.board.activity.BoardMainActivity
 import com.example.tp02.databinding.ActivityLoginBinding
 import com.example.tp02.member.api.MemberApiService
 import com.example.tp02.member.viewmodel.MemberViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-//controller
+//view
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var memberViewModel: MemberViewModel
@@ -27,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
         // MemberApiService 인스턴스 생성
         val memberApiService = retrofit.create(MemberApiService::class.java)
 
@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity() {
         memberViewModel.loginResult.observe(this, Observer { success ->
             if (success) { //로그인 성공시 로직
                 showToast("로그인 성공")
+                goBoardMainActivity()
             } else {
                 showToast("로그인 실패")
             }
@@ -54,6 +55,11 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goRegisterActivity() {
         val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun goBoardMainActivity() {
+        val intent = Intent(this, BoardMainActivity::class.java)
         startActivity(intent)
     }
 }

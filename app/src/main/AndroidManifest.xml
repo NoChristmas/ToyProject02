@@ -15,7 +15,7 @@
         tools:targetApi="31">
         <!-- Login Activity -->
         <activity
-            android:name=".member.activity.LoginActivity"
+            android:name=".member.activity.MemberActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

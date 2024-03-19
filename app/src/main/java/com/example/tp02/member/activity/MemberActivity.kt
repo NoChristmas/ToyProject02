@@ -13,7 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 //controller
-class LoginActivity : AppCompatActivity() {
+class MemberActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var memberViewModel: MemberViewModel
 

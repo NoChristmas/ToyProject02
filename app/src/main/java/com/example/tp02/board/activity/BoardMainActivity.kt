@@ -26,7 +26,7 @@ class BoardMainActivity : AppCompatActivity() {
         val boardApiService = retrofit.create(BoardApiService::class.java)
         // BoardViewModel 초기화
         boardViewModel = BoardViewModel(boardApiService)
-        /*
+        /* Adapter 제작 필요
         //RecyclerView설정 가져와야함
         boardAdapter = BoardAdapter()
         

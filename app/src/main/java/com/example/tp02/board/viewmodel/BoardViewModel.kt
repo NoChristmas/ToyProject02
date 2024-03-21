@@ -42,7 +42,7 @@ class BoardViewModel (private val boardApiService : BoardApiService) {
                         Log.d("result","API 응답이 올바르지 않습니다.")
                     }
                 } else { //api 요청 실패 시
-                    Log.d("result","API 호출 실패")
+                    Log.d("result","board API 호출 실패")
                 }
             }
             result.onFailure { e ->

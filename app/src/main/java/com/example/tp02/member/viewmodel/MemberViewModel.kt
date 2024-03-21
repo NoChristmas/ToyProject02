@@ -1,24 +1,27 @@
 package com.example.tp02.member.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.tp02.member.api.MemberApiService
 import com.example.tp02.member.dto.MemberDTO
+import com.example.tp02.member.repository.MemberDataRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+
 import kotlinx.coroutines.launch
 
-
 //Service같은 놈
-class MemberViewModel(private val memberApiService: MemberApiService) {
-
+class MemberViewModel(private val memberApiService: MemberApiService, private val repository: MemberDataRepository) : ViewModel() {
+    //loginResult
     private val _loginResult = MutableLiveData<Boolean>()
     val loginResult:LiveData<Boolean>get() = _loginResult
-
+    //ID 중복 체크
     private val _checkIdResult = MutableLiveData<Boolean>()
     val checkIdResult:LiveData<Boolean>get() = _checkIdResult
-
+    //회원가입
     private val _registerResult = MutableLiveData<Boolean>()
     val registerResult:LiveData<Boolean>get() = _registerResult
 
@@ -48,25 +51,23 @@ class MemberViewModel(private val memberApiService: MemberApiService) {
                     if (responseBody != null) {
                         val loginResult = responseBody["result"] as String
                         if (loginResult == "success") {
-                            println("로그인 성공!!!")
+                            // 로그인 성공 시 처리할 로직
                             Log.d("result","로그인 성공!!!")
                             _loginResult.postValue(true)
-                            // 로그인 성공 시 처리할 로직
+                            val token = responseBody["token"].toString()
+                            repository.saveToken(token)
                         } else {
-                            println("로그인 실패: ${responseBody["message"]}")
-                            Log.d("result","로그인 실패!!!")
-                            _loginResult.postValue(false)
                             // 로그인 실패 시 처리할 로직
+                            Log.d("result","로그인 실패 ${responseBody["message"]}")
+                            _loginResult.postValue(false)
                         }
                     } else {
-                        println("API 응답이 올바르지 않습니다.")
                         Log.d("result","API 응답이 올바르지 않습니다.!!!")
                         // API 응답이 올바르지 않은 경우 처리할 로직
                         _loginResult.postValue(false)
                     }
                 } else {
-                    println("API 호출 실패: ${response.message()}")
-                    Log.d("result","API 호출 실패!!!")
+                    Log.d("result","API 호출 실패 ${response.message()}")
                     _loginResult.postValue(false)
                     // API 호출 실패 시 처리할 로직
                 }

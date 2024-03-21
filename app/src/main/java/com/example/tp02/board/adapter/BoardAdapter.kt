@@ -1,5 +1,6 @@
 package com.example.tp02.board.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -11,6 +12,7 @@ import com.example.tp02.databinding.BoarditemRecyclerviewBinding
 class BoardAdapter : ListAdapter<BoardDTO, BoardAdapter.Holder>(BoardDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+        Log.d("BoardAdapter", "Creating ViewHolder") // 로그 추가
         val binding = BoarditemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return Holder(binding)
     }
@@ -26,7 +28,7 @@ class BoardAdapter : ListAdapter<BoardDTO, BoardAdapter.Holder>(BoardDiffCallbac
                 bdNo.text = item.bd_no.toString()
                 bdName.text = item.bd_name
                 urName.text = item.ur_name
-                bdRegDate.text = item.bd_reg_date.toString()
+                bdRegDate.text = item.bd_reg_date
                 bdHit.text = item.bd_hit.toString()
             }
         }

@@ -1,6 +1,7 @@
 package com.example.tp02.board.dto
 
-import java.sql.Date
+import java.util.Date
+
 data class BoardDTO (
     val bd_no: Int,
     val ur_no: Int,
@@ -10,5 +11,5 @@ data class BoardDTO (
     val bd_type: String,
     val bd_auth: Int,
     val bd_hit: Int,
-    val bd_reg_date: Date
+    val bd_reg_date: String // Date 대신 String으로 변경
 )

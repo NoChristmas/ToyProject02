@@ -10,6 +10,7 @@ import com.example.tp02.R
 import com.example.tp02.board.activity.BoardMainActivity
 import com.example.tp02.databinding.ActivityLoginBinding
 import com.example.tp02.member.api.MemberApiService
+import com.example.tp02.member.repository.MemberDataRepository
 import com.example.tp02.member.viewmodel.MemberViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -30,10 +31,9 @@ class LoginActivity : AppCompatActivity() {
             .build()
         // MemberApiService 인스턴스 생성
         val memberApiService = retrofit.create(MemberApiService::class.java)
-
+        val memberDataRepository = MemberDataRepository(this)
         // LoginViewModel 인스턴스 생성 및 MemberApiService 주입
-        memberViewModel = MemberViewModel(memberApiService)
-
+        memberViewModel = MemberViewModel(memberApiService, memberDataRepository)
         // DataBinding 설정
         binding.memberViewModel = memberViewModel
         // 로그인 결과를 관찰하여 UI 업데이트

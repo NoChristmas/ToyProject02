@@ -32,9 +32,13 @@ class BoardViewModel (private val boardApiService : BoardApiService) {
                     if (responseBody != null) { //성공시
                         val getBoardsResult = responseBody["result"] as String
                         if (getBoardsResult == "success") {
+
                             Log.d("result", "게시판 가져오기 성공")
-                            _boardData.postValue(responseBody["list"] as List<BoardDTO>)
-                            _boardDataCount.postValue(responseBody["count"] as? Int)
+                            val list = responseBody["list"] as List<Map<String, Any>>
+                            _boardData.postValue(list.map { mapToBoardDTO(it)})
+                            val count = (responseBody["count"] as Double).toInt()
+                            _boardDataCount.postValue(count)
+                            Log.d("카운트","${_boardDataCount.value}")
                         } else {
                             Log.d("result", "response가 없음")
                         }
@@ -50,5 +54,19 @@ class BoardViewModel (private val boardApiService : BoardApiService) {
                 // 네트워크 오류 등 예외 발생 시 처리할 로직
             }
         }
+    }
+
+    private fun mapToBoardDTO(map: Map<String, Any>): BoardDTO {
+        return BoardDTO(
+            bd_no = (map["bd_no"] as Double).toInt(),
+            ur_no = (map["ur_no"] as Double).toInt(),
+            ur_name = map["ur_name"] as String,
+            bd_name = map["bd_name"] as String,
+            bd_info = map["bd_info"] as String,
+            bd_type = map["bd_type"] as String,
+            bd_auth = (map["bd_auth"] as Double).toInt(),
+            bd_hit = (map["bd_hit"] as Double).toInt(),
+            bd_reg_date = map["bd_reg_date"] as String
+        )
     }
 }

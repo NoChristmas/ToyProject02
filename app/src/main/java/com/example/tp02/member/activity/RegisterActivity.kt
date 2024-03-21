@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.example.tp02.R
 import com.example.tp02.databinding.ActivityRegisterBinding
 import com.example.tp02.member.api.MemberApiService
+import com.example.tp02.member.repository.MemberDataRepository
 import com.example.tp02.member.viewmodel.MemberViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -28,7 +29,8 @@ class RegisterActivity : AppCompatActivity() {
             .build()
         // MemberApiService 인스턴스 생성
         val memberApiService = retrofit.create(MemberApiService::class.java)
-        memberViewModel = MemberViewModel(memberApiService)
+        val memberDataRepository = MemberDataRepository(this)
+        memberViewModel = MemberViewModel(memberApiService, memberDataRepository)
         //binding 설정
         binding.memberViewModel = memberViewModel
 

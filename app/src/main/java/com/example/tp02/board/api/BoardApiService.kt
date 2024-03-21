@@ -17,8 +17,7 @@ interface BoardApiService {
     suspend fun loginApi(@Body memberDTO: MemberDTO): Response<Map<String, Object>>
     */
 
-    @POST("/api/board")
-    suspend fun writeBoardApi(@Body boardDTO: BoardDTO): Response<Map<String, Object>>
+
 
     /*
     @POST("/api/member/register")

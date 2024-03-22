@@ -23,6 +23,7 @@ class BoardMainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBoardmainBinding
     private lateinit var boardViewModel: BoardViewModel
     private lateinit var boardAdapter: BoardAdapter
+    private val boardList = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,17 +46,13 @@ class BoardMainActivity : AppCompatActivity() {
         val boardApiService = retrofit.create(BoardApiService::class.java)
         // BoardViewModel 초기화
         boardViewModel = BoardViewModel(boardApiService)
-
-
         //RecyclerView 설정
         binding.recyclerViewBoard.layoutManager = LinearLayoutManager(this)
-        boardAdapter = BoardAdapter()
-        binding.recyclerViewBoard.adapter = boardAdapter
 
         boardViewModel.boardData.observe(this, Observer { boardList ->
-            boardAdapter.submitList(boardList)
+            boardAdapter = BoardAdapter(boardList)
+            binding.recyclerViewBoard.adapter = boardAdapter
         })
-
         boardViewModel.getBoards()
     }
 }

@@ -1,52 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#FBECF1">
+    <!-- 게시판 아이템의 각 요소를 트렌디하게 스타일링 -->
+    <TextView
+        android:id="@+id/bd_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="게시글 번호"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:padding="8dp"
+        android:layout_marginBottom="4dp" />
+
+    <TextView
+        android:id="@+id/bd_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="제목"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_marginTop="10dp"
-        android:background="#A3D22D"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal">
-        <TextView
-            android:id="@+id/bd_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="bd_no"
-            android:textSize="10sp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp" />
-        <TextView
-            android:id="@+id/bd_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="bd_name"
-            android:textSize="10sp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp" />
+
         <TextView
             android:id="@+id/ur_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="ur_name"
-            android:textSize="10sp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp" />
+            android:layout_weight="1"
+            android:text="작성자"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="4dp" />
+
         <TextView
             android:id="@+id/bd_reg_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="bd_reg_date"
-            android:textSize="10sp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp" />
+            android:layout_weight="1"
+            android:text="게시일"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="4dp" />
+
         <TextView
             android:id="@+id/bd_hit"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="bd_hit"
-            android:textSize="10sp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp" />
+            android:layout_weight="1"
+            android:text="조회수"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginBottom="4dp" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+
 </LinearLayout>

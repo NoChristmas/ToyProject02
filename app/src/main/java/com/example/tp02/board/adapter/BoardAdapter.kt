@@ -9,38 +9,27 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp02.board.dto.BoardDTO
 import com.example.tp02.databinding.BoarditemRecyclerviewBinding
 
-class BoardAdapter : ListAdapter<BoardDTO, BoardAdapter.Holder>(BoardDiffCallback()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        Log.d("BoardAdapter", "Creating ViewHolder") // 로그 추가
+class BoardAdapter(private val boardList : List<BoardDTO>) : RecyclerView.Adapter<BoardAdapter.BoardDTOViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardDTOViewHolder {
         val binding = BoarditemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return Holder(binding)
+        return BoardDTOViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+    override fun onBindViewHolder(holder: BoardDTOViewHolder, position: Int) {
+        holder.bind(boardList[position])
     }
 
-    inner class Holder(private val binding: BoarditemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+    override fun getItemCount(): Int = boardList.size
+
+
+    inner class BoardDTOViewHolder(private val binding: BoarditemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BoardDTO) {
-            binding.apply {
-                bdNo.text = item.bd_no.toString()
-                bdName.text = item.bd_name
-                urName.text = item.ur_name
-                bdRegDate.text = item.bd_reg_date
-                bdHit.text = item.bd_hit.toString()
-            }
+            binding.bdNo.text = item.bd_no.toString()
+            binding.bdName.text = item.bd_name
+            binding.urName.text = item.ur_name
+            binding.bdRegDate.text = item.bd_reg_date
+            binding.bdHit.text = item.bd_hit.toString()
         }
     }
 
-    private class BoardDiffCallback : DiffUtil.ItemCallback<BoardDTO>() {
-        override fun areItemsTheSame(oldItem: BoardDTO, newItem: BoardDTO): Boolean {
-            return oldItem.bd_no == newItem.bd_no
-        }
-
-        override fun areContentsTheSame(oldItem: BoardDTO, newItem: BoardDTO): Boolean {
-            return oldItem == newItem
-        }
-    }
 }

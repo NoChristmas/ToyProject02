@@ -35,9 +35,6 @@
                 android:padding="10dp"
                 android:layout_marginStart="10dp" />
         </LinearLayout>
-
-        <!-- 로그아웃 -->
-
         <!-- 게시판 목록 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_board"

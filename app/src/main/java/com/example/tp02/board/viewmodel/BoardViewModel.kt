@@ -23,6 +23,11 @@ class BoardViewModel (private val boardApiService : BoardApiService) {
         callGetBoardsApi()
     }
 
+    fun writeBoard(bd_name:String, bd_info:String, bd_type:String) {
+        //TODO(boardDTO 만들기)
+        //val boardDTO = BoardDTO()
+        //callWriteBoardApi(boardDTO)
+    }
     private fun callGetBoardsApi() {
         CoroutineScope(Dispatchers.IO).launch { //비동기 처리
             val result = runCatching {
@@ -32,7 +37,6 @@ class BoardViewModel (private val boardApiService : BoardApiService) {
                     if (responseBody != null) { //성공시
                         val getBoardsResult = responseBody["result"] as String
                         if (getBoardsResult == "success") {
-
                             Log.d("result", "게시판 가져오기 성공")
                             val list = responseBody["list"] as List<Map<String, Any>>
                             _boardData.postValue(list.map { mapToBoardDTO(it)})
@@ -56,6 +60,36 @@ class BoardViewModel (private val boardApiService : BoardApiService) {
         }
     }
 
+    private fun callWriteBoardApi(boardDTO: BoardDTO) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = runCatching {
+                val response = boardApiService.writeBoardApi(boardDTO)
+                if(response.isSuccessful) {
+                    val responseBody = response.body()
+                    if (responseBody != null) { //성공시
+                        val getBoardsResult = responseBody["result"] as String
+                        if (getBoardsResult == "success") {
+                            Log.d("result", "게시판 가져오기 성공")
+                            val list = responseBody["list"] as List<Map<String, Any>>
+                            _boardData.postValue(list.map { mapToBoardDTO(it)})
+                            val count = (responseBody["count"] as Double).toInt()
+                            _boardDataCount.postValue(count)
+                            Log.d("카운트","${_boardDataCount.value}")
+                        } else {
+                            Log.d("result", "response가 없음")
+                        }
+                    } else {
+                        Log.d("result","API 응답이 올바르지 않습니다.")
+                    }
+                } else { //api 요청 실패 시
+                    Log.d("result","board API 호출 실패")
+                }
+            }
+            result.onFailure { e->
+                println("네트워크 오류 발생: ${e.message}")
+            }
+        }
+    }
     private fun mapToBoardDTO(map: Map<String, Any>): BoardDTO {
         return BoardDTO(
             bd_no = (map["bd_no"] as Double).toInt(),

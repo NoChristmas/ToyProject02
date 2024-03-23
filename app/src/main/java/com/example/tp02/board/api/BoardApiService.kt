@@ -10,7 +10,10 @@ import retrofit2.http.Query
 
 interface BoardApiService {
     @GET("/api/board")
-    suspend fun getBoardsApi(): Response<Map<String,Object>>
+    suspend fun getBoardsApi(): Response<Map<String,Any>>
+
+    @POST("/api/board")
+    suspend fun writeBoardApi(@Body boardDTO: BoardDTO): Response<Map<String,Any>>
 
     /*
     @PUT("/api/board/{bd_no}")

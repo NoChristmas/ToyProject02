@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="board_category_array">
+        <item>일반</item>
+        <item>특별</item>
+        <item>익명</item>
+    </string-array>
+</resources>

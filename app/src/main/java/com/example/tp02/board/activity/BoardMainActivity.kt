@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tp02.R
 import com.example.tp02.board.adapter.BoardAdapter
+import com.example.tp02.board.adapter.BoardDetailAdapter
 import com.example.tp02.board.api.BoardApiService
 import com.example.tp02.board.viewmodel.BoardViewModel
 import com.example.tp02.databinding.ActivityBoardmainBinding
@@ -51,7 +52,11 @@ class BoardMainActivity : AppCompatActivity() {
         binding.recyclerViewBoard.layoutManager = LinearLayoutManager(this)
 
         boardViewModel.boardData.observe(this, Observer { boardList ->
-            boardAdapter = BoardAdapter(boardList)
+            boardAdapter = BoardAdapter(boardList) { bd_no ->
+                val intent = Intent(this,BoardDetailActivity::class.java)
+                intent.putExtra("bd_no", bd_no)
+                startActivity(intent)
+            }
             binding.recyclerViewBoard.adapter = boardAdapter
         })
         boardViewModel.getBoards()
@@ -75,4 +80,6 @@ class BoardMainActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
+
+
 }

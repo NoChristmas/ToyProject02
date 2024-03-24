@@ -6,6 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BoardApiService {
@@ -15,11 +16,9 @@ interface BoardApiService {
     @POST("/api/board")
     suspend fun writeBoardApi(@Body boardDTO: BoardDTO): Response<Map<String,Any>>
 
-    /*
-    @PUT("/api/board/{bd_no}")
-    suspend fun loginApi(@Body memberDTO: MemberDTO): Response<Map<String, Object>>
-    */
 
+    @GET("/api/board/{bd_no}")
+    suspend fun getBoardApi(@Path ("bd_no") bd_no: Int): Response<Map<String, Any>>
 
 
     /*

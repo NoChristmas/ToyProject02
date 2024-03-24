@@ -60,17 +60,17 @@
                 android:textAlignment="viewStart"
                 android:textSize="14sp" />
 
-            <!-- 로그인 버튼 -->
+            <!-- 작성 버튼 -->
             <Button
                 android:id="@+id/button_write"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="작성하기"
-
+                android:onClick="@{()->boardViewModel.clickWriteBtn(bdName.getText().toString(), bdInfo.getText().toString(), bdTypeSpinner.getSelectedItem().toString())}"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp" />
-            <!-- 회원가입 링크 -->
+            <!-- 뒤로가기 -->
             <Button
                 android:id="@+id/button_goBoardMain"
                 android:layout_width="match_parent"

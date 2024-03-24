@@ -6,21 +6,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tp02.board.dto.BoardDTO
 import com.example.tp02.databinding.BoarditemRecyclerviewBinding
 
-class BoardAdapter(private val boardList : List<BoardDTO>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<BoardAdapter.BoardDTOViewHolder>() {
+class BoardDetailAdapter (private val boardList: List<BoardDTO>) : RecyclerView.Adapter<BoardDetailAdapter.BoardDTOViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BoardDTOViewHolder {
         val binding = BoarditemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BoardDTOViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: BoardDTOViewHolder, position: Int) {
-        val currentItem = boardList[position]
-        holder.bind(currentItem)
-        holder.itemView.setOnClickListener {
-            val bd_no = currentItem.bd_no?.toInt()
-            if(bd_no != null) {
-                onItemClick(bd_no)
-            }
-        }
+        holder.bind(boardList[position])
     }
 
     override fun getItemCount(): Int = boardList.size
@@ -35,5 +28,4 @@ class BoardAdapter(private val boardList : List<BoardDTO>, private val onItemCli
             binding.bdHit.text = item.bd_hit.toString()
         }
     }
-
 }

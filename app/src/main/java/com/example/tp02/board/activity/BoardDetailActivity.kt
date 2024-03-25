@@ -19,8 +19,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BoardDetailActivity : AppCompatActivity() {
-    private lateinit var boardViewModel : BoardViewModel
+class BoardDetailActivity : BaseBoardActivity() {
     private lateinit var binding : ActivityBoarddetailBinding
     private lateinit var boardAdapter: BoardAdapter
     private var bd_no: Int = 0
@@ -28,24 +27,8 @@ class BoardDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_boarddetail)
-        val memberDataRepository = MemberDataRepository(this)
-        val token = memberDataRepository.getToken().toString()
-        // OkHttpClient에 TokenInterceptor 추가
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(TokenInterceptor(token))
-            .build()
-        // Retrofit 클라이언트 생성
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-        val boardApiService = retrofit.create(BoardApiService::class.java)
-        // BoardViewModel 초기화
-        boardViewModel = BoardViewModel(boardApiService)
 
         bd_no = intent.getIntExtra("bd_no",0)
-        Log.d("bd_no",bd_no.toString())
         boardViewModel.boardDetailData.observe(this, Observer { boardDetailList ->
             if(boardDetailList.isNotEmpty()) {
                 val boardDetail = boardDetailList[0]
@@ -57,6 +40,16 @@ class BoardDetailActivity : AppCompatActivity() {
                 binding.bdRegDate.text = "작성날짜: ${boardDetail.bd_reg_date}"
             }
         })
+
+        boardViewModel.deleteResult.observe(this, Observer { result ->
+            if(result) {
+                showToast("삭제 성공")
+                goBoardMainActivity()
+            } else {
+                showToast("삭제 실패")
+            }
+        })
+
         boardViewModel.getBoard(bd_no)
 
         binding.buttonLogout.setOnClickListener {
@@ -71,15 +64,6 @@ class BoardDetailActivity : AppCompatActivity() {
         binding.buttonDelete.setOnClickListener {
             boardViewModel.deleteBoard(bd_no)
         }
-
-        boardViewModel.deleteResult.observe(this, Observer { result ->
-            if(result) {
-                showToast("삭제 성공")
-                goBoardMainActivity()
-            } else {
-                showToast("삭제 실패")
-            }
-        })
     }
 
     private fun goBoardModifyActivity(bd_no:Int) {

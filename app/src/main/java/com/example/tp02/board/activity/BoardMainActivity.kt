@@ -23,31 +23,12 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class BoardMainActivity : AppCompatActivity() {
+class BoardMainActivity : BaseBoardActivity() {
     private lateinit var binding: ActivityBoardmainBinding
-    private lateinit var boardViewModel: BoardViewModel
     private lateinit var boardAdapter: BoardAdapter
-    private val boardList = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_boardmain)
-        val memberDataRepository = MemberDataRepository(this)
-        val token = memberDataRepository.getToken().toString()
-        // OkHttpClient에 TokenInterceptor 추가
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(TokenInterceptor(token))
-            .build()
-        // Retrofit 클라이언트 생성
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-        val boardApiService = retrofit.create(BoardApiService::class.java)
-        // BoardViewModel 초기화
-        boardViewModel = BoardViewModel(boardApiService)
-
         //RecyclerView 설정
         binding.recyclerViewBoard.layoutManager = LinearLayoutManager(this)
 
@@ -64,22 +45,17 @@ class BoardMainActivity : AppCompatActivity() {
         binding.buttonWrite.setOnClickListener {
             goBoardWriteActivity()
         }
-
         binding.buttonLogout.setOnClickListener {
             memberDataRepository.clearToken()
             goLoginActivity()
         }
     }
-
     private fun goBoardWriteActivity() {
         val intent = Intent(this, BoardWriteActivity::class.java)
         startActivity(intent)
     }
-
     private fun goLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
-
-
 }

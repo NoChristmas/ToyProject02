@@ -17,7 +17,7 @@ open class BaseBoardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRetrofit()
-        initBoardViewMode()
+        initBoardViewModel()
         memberDataRepository = MemberDataRepository(this)
     }
 
@@ -36,7 +36,7 @@ open class BaseBoardActivity : AppCompatActivity() {
             .build()
         boardApiService = retrofit.create(BoardApiService::class.java)
     }
-    private fun initBoardViewMode() {
+    private fun initBoardViewModel() {
         boardViewModel = BoardViewModel(boardApiService)
     }
 }

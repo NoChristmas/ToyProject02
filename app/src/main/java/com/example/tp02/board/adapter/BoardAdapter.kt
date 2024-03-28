@@ -11,7 +11,6 @@ class BoardAdapter(private val boardList : List<BoardDTO>, private val onItemCli
         val binding = BoarditemRecyclerviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BoardDTOViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: BoardDTOViewHolder, position: Int) {
         val currentItem = boardList[position]
         holder.bind(currentItem)
@@ -22,10 +21,7 @@ class BoardAdapter(private val boardList : List<BoardDTO>, private val onItemCli
             }
         }
     }
-
     override fun getItemCount(): Int = boardList.size
-
-
     inner class BoardDTOViewHolder(private val binding: BoarditemRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BoardDTO) {
             binding.bdNo.text = item.bd_no.toString()

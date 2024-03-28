@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp"
-    android:background="#FBECF1">
+    android:background="#EEEEEE">
     <!-- 게시판 아이템의 각 요소를 트렌디하게 스타일링 -->
     <TextView
         android:id="@+id/bd_no"

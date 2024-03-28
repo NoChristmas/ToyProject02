@@ -3,6 +3,8 @@
 간단한 Android Studio 및 Kotlin을 사용한 Spring Boot API 통합 프로젝트 
 MVVC 구조를 따라서 구현해본 kotlin Project
 
+설명 블로그 URL : https://velog.io/@nochristmas/posts
+
 ## 프로젝트 소개
 
 본 프로젝트는 Android Studio에서 Kotlin을 사용하여 Spring Boot 애플리케이션과 통합하여 RESTful API를 호출하고 데이터를 표시하는 게시판 CRUD 입니다.
